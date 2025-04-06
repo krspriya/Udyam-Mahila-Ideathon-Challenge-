@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aatmanirbhar Nari - Women Entrepreneurship Platform</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --empower-purple: #6a1b9a;
+      --empower-pink: #e91e63;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .hero {
+      background: linear-gradient(135deg, var(--empower-purple), var(--empower-pink));
+      color: white;
+    }
+    .feature-card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .feature-card:hover {
+      transform: translateY(-10px);
+    }
+    .btn-empower {
+      background-color: var(--empower-purple);
+      color: white;
+    }
+    .product-img {
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px 10px 0 0;
+    }
+    .lang-switcher {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      z-index: 1000;
+    }
+    .tamil-font {
+      font-family: 'Latha', 'Nirmala UI', sans-serif;
+    }
+    .hindi-font {
+      font-family: 'Nirmala UI', sans-serif;
+    }
+    #posterCanvas {
+      border: 1px solid #ddd;
+      margin-bottom: 15px;
+      background-color: white;
+    }
+    .template-thumbnail {
+      width: 100px;
+      height: 150px;
+      object-fit: cover;
+      margin: 5px;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    .template-thumbnail:hover {
+      border-color: var(--empower-purple);
+    }
+    .template-thumbnail.selected {
+      border-color: var(--empower-pink);
+    }
+    .color-option {
+      width: 30px;
+      height: 30px;
+      display: inline-block;
+      margin: 5px;
+      cursor: pointer;
+      border: 2px solid #ddd;
+    }
+    .color-option:hover {
+      border-color: #333;
+    }
+  </style>
+</head>
+<body>
+  <!-- Language Switcher -->
+  <div style="margin-top: 50px;">
+  <div class="lang-switcher btn-group">
+    <button class="btn btn-sm btn-light" onclick="changeLanguage('en')">English</button>
+    <button class="btn btn-sm btn-light" onclick="changeLanguage('hi')">हिंदी</button>
+    <button class="btn btn-sm btn-light" onclick="changeLanguage('ta')">தமிழ்</button>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="assets\Screenshot 2025-04-06 101231.png" class="d-inline-block align-top" style="height: 30px; margin-left: 8px;">
+        <span data-lang="en">Aatmanirbhar Nari</span>
+        <span data-lang="hi" class="d-none">आत्मनिर्भर नारी</span>
+        <span data-lang="ta" class="d-none">ஆத்மநிர்பர் நாரி</span>
+      </a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#home" data-lang="en">Home</a>
+            <a class="nav-link active d-none" href="#home" data-lang="hi">होम</a>
+            <a class="nav-link active d-none" href="#home" data-lang="ta">முகப்பு</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#business" data-lang="en">Business Planning</a>
+            <a class="nav-link d-none" href="#business" data-lang="hi">व्यवसाय योजना</a>
+            <a class="nav-link d-none" href="#business" data-lang="ta">வணிகத் திட்டம்</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#ecommerce" data-lang="en">E-Commerce</a>
+            <a class="nav-link d-none" href="#ecommerce" data-lang="hi">ई-कॉमर्स</a>
+            <a class="nav-link d-none" href="#ecommerce" data-lang="ta">இ-காமர்ஸ்</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#finance" data-lang="en">Finance</a>
+            <a class="nav-link d-none" href="#finance" data-lang="hi">वित्त</a>
+            <a class="nav-link d-none" href="#finance" data-lang="ta">நிதி</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#marketing" data-lang="en">Marketing</a>
+            <a class="nav-link d-none" href="#marketing" data-lang="hi">मार्केटिंग</a>
+            <a class="nav-link d-none" href="#marketing" data-lang="ta">சந்தைப்படுத்தல்</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#softskills" data-lang="en">Soft Skills</a>
+            <a class="nav-link d-none" href="#softskills" data-lang="hi">सॉफ्ट स्किल्स</a>
+            <a class="nav-link d-none" href="#softskills" data-lang="ta">மென்திறன்கள்</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#vocational" data-lang="en">Vocational</a>
+            <a class="nav-link d-none" href="#vocational" data-lang="hi">व्यावसायिक</a>
+            <a class="nav-link d-none" href="#vocational" data-lang="ta">தொழில்</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#community" data-lang="en">Community</a>
+            <a class="nav-link d-none" href="#community" data-lang="hi">समुदाय</a>
+            <a class="nav-link d-none" href="#community" data-lang="ta">சமூகம்</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero py-5">
+    <div class="container text-center">
+      <h1 class="display-4 fw-bold mb-4">
+        <span data-lang="en">Empower Your Business Journey</span>
+        <span data-lang="hi" class="d-none">अपने व्यवसाय की यात्रा को सशक्त बनाएं</span>
+        <span data-lang="ta" class="d-none">உங்கள் வணிக பயணத்தை அதிகாரமளிக்கவும்</span>
+      </h1>
+      <p class="lead mb-5">
+        <span data-lang="en">Skills, Tools, and Support for Women Entrepreneurs</span>
+        <span data-lang="hi" class="d-none">महिला उद्यमियों के लिए कौशल, उपकरण और समर्थन</span>
+        <span data-lang="ta" class="d-none">பெண் தொழில்முனைவோருக்கான திறன்கள், கருவிகள் மற்றும் ஆதரவு</span>
+      </p>
+      <div class="row g-4">
+        <!-- Feature 1: Blended Learning -->
+        <div class="col-md-3">
+          <div class="card feature-card h-100">
+            <div class="card-body text-center">
+              <h5 class="card-title">
+                <span data-lang="en">📱 Blended Learning</span>
+                <span data-lang="hi" class="d-none">📱 मिश्रित शिक्षा</span>
+                <span data-lang="ta" class="d-none">📱 கலப்பு கற்றல்</span>
+              </h5>
+              <p class="card-text">
+                <span data-lang="en">Learn via IVR, videos, and workshops</span>
+                <span data-lang="hi" class="d-none">आईवीआर, वीडियो और कार्यशालाओं के माध्यम से सीखें</span>
+                <span data-lang="ta" class="d-none">ஐவிஆர், வீடியோக்கள் மற்றும் பயிற்சி மூலம் கற்றுக்கொள்ளுங்கள்</span>
+              </p>
+              <button class="btn btn-empower" onclick="playIVR()">
+                <span data-lang="en">Play IVR Lesson</span>
+                <span data-lang="hi" class="d-none">आईवीआर सबक सुनें</span>
+                <span data-lang="ta" class="d-none">ஐவிஆர் பாடம் கேளுங்கள்</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Feature 2: E-Commerce -->
+        <div class="col-md-3">
+          <div class="card feature-card h-100">
+            <div class="card-body text-center">
+              <h5 class="card-title">
+                <span data-lang="en">🛍️ E-Commerce</span>
+                <span data-lang="hi" class="d-none">🛍️ ई-कॉमर्स</span>
+                <span data-lang="ta" class="d-none">🛍️ இ-காமர்ஸ்</span>
+              </h5>
+              <p class="card-text">
+                <span data-lang="en">Sell products online easily</span>
+                <span data-lang="hi" class="d-none">आसानी से ऑनलाइन उत्पाद बेचें</span>
+                <span data-lang="ta" class="d-none">எளிதாக ஆன்லைனில் பொருட்களை விற்கவும்</span>
+              </p>
+              <button class="btn btn-empower" onclick="showProducts()">
+                <span data-lang="en">View Products</span>
+                <span data-lang="hi" class="d-none">उत्पाद देखें</span>
+                <span data-lang="ta" class="d-none">பொருட்களைக் காண்க</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Feature 3: Financial Tools -->
+        <div class="col-md-3">
+          <div class="card feature-card h-100">
+            <div class="card-body text-center">
+              <h5 class="card-title">
+                <span data-lang="en">💰 Financial Tools</span>
+                <span data-lang="hi" class="d-none">💰 वित्तीय उपकरण</span>
+                <span data-lang="ta" class="d-none">💰 நிதி கருவிகள்</span>
+              </h5>
+              <p class="card-text">
+                <span data-lang="en">Loans, savings, and EMI calculator</span>
+                <span data-lang="hi" class="d-none">ऋण, बचत और ईएमआई कैलकुलेटर</span>
+                <span data-lang="ta" class="d-none">கடன், சேமிப்பு மற்றும் ஈஎம்ஐ கால்குலேட்டர்</span>
+              </p>
+              <button class="btn btn-empower" onclick="showFinanceTools()">
+                <span data-lang="en">Try Calculator</span>
+                <span data-lang="hi" class="d-none">कैलकुलेटर आज़माएं</span>
+                <span data-lang="ta" class="d-none">கால்குலேட்டரை முயற்சிக்கவும்</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      <!-- Communication Skills -->
+      <div class="col-md-3">
+        <div class="card feature-card h-100">
+          <div class="card-body text-center">
+            <h5 class="card-title">
+              <span data-lang="en">🗪 Communication Skills</span>
+              <span data-lang="hi" class="d-none">संचार कौशल</span>
+              <span data-lang="ta" class="d-none">தொடர்பு திறன்கள்</span>
+            </h5>
+            <p class="card-text">
+              <span data-lang="en">Learn effective verbal and written communication techniques</span>
+              <span data-lang="hi" class="d-none">प्रभावी मौखिक और लिखित संचार तकनीक सीखें</span>
+              <span data-lang="ta" class="d-none">பயனுள்ள வாய்மொழி மற்றும் எழுத்து தொடர்பு நுட்பங்களைக் கற்றுக்கொள்ளுங்கள்</span>
+            </p>
+            <button class="btn btn-empower" onclick="showCommunicationTips()">
+              <span data-lang="en">View Tips</span>
+              <span data-lang="hi" class="d-none">टिप्स देखें</span>
+              <span data-lang="ta" class="d-none">உதவிக்குறிப்புகளைக் காண்க</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+       <!-- Negotiation Skills -->
+      <div class="col-md-3">
+        <div class="card feature-card h-100">
+          <div class="card-body text-center">
+            <h5 class="card-title">
+              <span data-lang="en">🤝 Negotiation Skills</span>
+              <span data-lang="hi" class="d-none">बातचीत कौशल</span>
+              <span data-lang="ta" class="d-none">பேரம் பேசும் திறன்கள்</span>
+            </h5>
+            <p class="card-text">
+              <span data-lang="en">Master negotiation techniques for better business deals</span>
+                <span data-lang="hi" class="d-none">बेहतर व्यवसाय सौदों के लिए बातचीत तकनीक में महारत हासिल करें</span>
+                <span data-lang="ta" class="d-none">சிறந்த வணிக ஒப்பந்தங்களுக்கான பேரம் பேசும் நுட்பங்களைக் கற்றுக்கொள்ளுங்கள்</span>
+            </p>
+            <button class="btn btn-empower" onclick="showNegotiationTips()">
+              <span data-lang="en">Learn Techniques</span>
+              <span data-lang="hi" class="d-none">तकनीक सीखें</span>
+              <span data-lang="ta" class="d-none">நுட்பங்களைக் கற்றுக்கொள்ளுங்கள்</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      
+      
+
+      <!-- Leadership Skills -->
+      <div class="col-md-3">
+        <div class="card feature-card h-100">
+          <div class="card-body text-center">
+            <h5 class="card-title">
+              <span data-lang="en">🤜🤛 Leadership Skills</span>
+              <span data-lang="hi" class="d-none">नेतृत्व कौशल</span>
+              <span data-lang="ta" class="d-none">தலைமைத்துவ திறன்கள்</span>
+            </h5>
+            <p class="card-text">
+              <span data-lang="en">Develop leadership qualities to grow your business</span>
+              <span data-lang="hi" class="d-none">अपने व्यवसाय को बढ़ाने के लिए नेतृत्व गुण विकसित करें</span>
+              <span data-lang="ta" class="d-none">உங்கள் வணிகத்தை வளர்ப்பதற்கான தலைமைத்துவ குணங்களை வளர்த்துக் கொள்ளுங்கள்</span>
+            </p>
+            <button class="btn btn-empower" onclick="showLeadershipTips()">
+              <span data-lang="en">Get Started</span>
+              <span data-lang="hi" class="d-none">शुरू करें</span>
+              <span data-lang="ta" class="d-none">தொடங்கவும்</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+        
+        <!-- Feature 4: Marketing Tools -->
+        <div class="col-md-3">
+          <div class="card feature-card h-100">
+            <div class="card-body text-center">
+              <h5 class="card-title">
+                <span data-lang="en">📢 Marketing Tools</span>
+                <span data-lang="hi" class="d-none">📢 मार्केटिंग टूल्स</span>
+                <span data-lang="ta" class="d-none">📢 சந்தைப்படுத்தல் கருவிகள்</span>
+              </h5>
+              <p class="card-text">
+                <span data-lang="en">Create posters, social media content</span>
+                <span data-lang="hi" class="d-none">पोस्टर, सोशल मीडिया सामग्री बनाएं</span>
+                <span data-lang="ta" class="d-none">போஸ்டர்கள், சமூக ஊடக உள்ளடக்கத்தை உருவாக்கவும்</span>
+              </p>
+              <button class="btn btn-empower" onclick="window.location.href='#marketing'">
+                <span data-lang="en">Try Designer</span>
+                <span data-lang="hi" class="d-none">डिज़ाइनर आज़माएं</span>
+                <span data-lang="ta" class="d-none">வடிவமைப்பாளரை முயற்சிக்கவும்</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Business Planning Section -->
+  <section id="business" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">
+        <span data-lang="en">Business Planning Toolkit</span>
+        <span data-lang="hi" class="d-none">व्यवसाय योजना उपकरण</span>
+        <span data-lang="ta" class="d-none">வணிகத் திட்டமிடல் கருவிகள்</span>
+      </h2>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">
+                <span data-lang="en">SWOT Analysis Generator</span>
+                <span data-lang="hi" class="d-none">SWOT विश्लेषण जनरेटर</span>
+                <span data-lang="ta" class="d-none">SWOT பகுப்பாய்வு ஜெனரேட்டர்</span>
+              </h5>
+              <textarea id="businessIdea" class="form-control mb-3" rows="3" 
+                        data-lang-placeholder-en="Describe your business (e.g., 'I sell handmade papads')"
+                        data-lang-placeholder-hi="अपने व्यवसाय का वर्णन करें (उदा., 'मैं हाथ से बने पापड़ बेचती हूँ')"
+                        data-lang-placeholder-ta="உங்கள் வணிகத்தை விவரிக்கவும் (எ.கா., 'நான் கைவினைப் பாபாட் விற்கிறேன்')"></textarea>
+              <button class="btn btn-empower" onclick="generateSWOT()">
+                <span data-lang="en">Generate SWOT</span>
+                <span data-lang="hi" class="d-none">SWOT बनाएं</span>
+                <span data-lang="ta" class="d-none">SWOT உருவாக்கு</span>
+              </button>
+              <div id="swotResult" class="mt-3 p-3 bg-white border rounded"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <span data-lang="en">Marketplace Integration</span>
+                <span data-lang="hi" class="d-none">मार्केटप्लेस एकीकरण</span>
+                <span data-lang="ta" class="d-none">சந்தை ஒருங்கிணைப்பு</span>
+              </h5>
+              <div class="d-flex justify-content-around my-4">
+                <img src="assets/ONDC.png" style="height: 50px;" alt="ONDC" class="img-fluid">
+                <img src="assets/f_lipkart.png" style="height: 50px;" alt="Flipkart" class="img-fluid">
+                <img src="assets/mesho.png" style="height: 50px;" alt="Meesho" class="img-fluid">
+              </div>
+              <button class="btn btn-empower w-100" onclick="connectMarketplace()">
+                <span data-lang="en">Connect Your Products</span>
+                <span data-lang="hi" class="d-none">अपने उत्पाद जोड़ें</span>
+                <span data-lang="ta" class="d-none">உங்கள் பொருட்களை இணைக்கவும்</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- E-Commerce Section -->
+  <section id="ecommerce" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">
+        <span data-lang="en">Your E-Commerce Dashboard</span>
+        <span data-lang="hi" class="d-none">आपका ई-कॉमर्स डैशबोर्ड</span>
+        <span data-lang="ta" class="d-none">உங்கள் இ-காமர்ஸ் டாஷ்போர்டு</span>
+      </h2>
+      <div class="row" id="productList">
+        <!-- Products will load here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Financial Tools Section -->
+  <section id="finance" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">
+        <span data-lang="en">Financial Management</span>
+        <span data-lang="hi" class="d-none">वित्तीय प्रबंधन</span>
+        <span data-lang="ta" class="d-none">நிதி மேலாண்மை</span>
+      </h2>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">
+                <span data-lang="en">Loan EMI Calculator</span>
+                <span data-lang="hi" class="d-none">लोन ईएमआई कैलकुलेटर</span>
+                <span data-lang="ta" class="d-none">கடன் EMI கால்குலேட்டர்</span>
+              </h5>
+              <div class="mb-3">
+                <label class="form-label">
+                  <span data-lang="en">Loan Amount (₹)</span>
+                  <span data-lang="hi" class="d-none">ऋण राशि (₹)</span>
+                  <span data-lang="ta" class="d-none">கடன் தொகை (₹)</span>
+                </label>
+                <input type="number" id="loanAmount" class="form-control" value="50000">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">
+                  <span data-lang="en">Tenure (months)</span>
+                  <span data-lang="hi" class="d-none">अवधि (महीने)</span>
+                  <span data-lang="ta" class="d-none">காலம் (மாதங்கள்)</span>
+                </label>
+                <input type="number" id="loanTenure" class="form-control" value="12">
+              </div>
+              <button class="btn btn-empower" onclick="calculateEMI()">
+                <span data-lang="en">Calculate EMI</span>
+                <span data-lang="hi" class="d-none">ईएमआई की गणना करें</span>
+                <span data-lang="ta" class="d-none">EMI கணக்கிடு</span>
+              </button>
+              <div id="emiResult" class="mt-3 p-3 bg-white border rounded"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <span data-lang="en">UPI Payment Simulator</span>
+                <span data-lang="hi" class="d-none">यूपीआई भुगतान सिम्युलेटर</span>
+                <span data-lang="ta" class="d-none">UPI கட்டண சிமுலேட்டர்</span>
+              </h5>
+              <div class="mb-3">
+                <label class="form-label">
+                  <span data-lang="en">UPI ID</span>
+                  <span data-lang="hi" class="d-none">यूपीआई आईडी</span>
+                  <span data-lang="ta" class="d-none">UPI ஐடி</span>
+                </label>
+                <input type="text" class="form-control" value="empowerher@upi">
+              </div>
+              <button class="btn btn-success" onclick="alertPayment()">
+                <span data-lang="en">Test Payment</span>
+                <span data-lang="hi" class="d-none">भुगतान परीक्षण</span>
+                <span data-lang="ta" class="d-none">சோதனை கட்டணம்</span>
+              </button>
+              <div class="mt-3">
+                <small class="text-muted">
+                  <span data-lang="en">Real UPI integration would connect to NPCI APIs</span>
+                  <span data-lang="hi" class="d-none">वास्तविक यूपीआई एकीकरण एनपीसीआई एपीआई से जुड़ेगा</span>
+                  <span data-lang="ta" class="d-none">உண்மையான UPI ஒருங்கிணைப்பு NPCI APIகளுடன் இணைக்கப்படும்</span>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Digital Marketing Toolkit Section -->
+  <section id="marketing" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">
+        <span data-lang="en">Digital Marketing Toolkit</span>
+        <span data-lang="hi" class="d-none">डिजिटल मार्केटिंग टूलकिट</span>
+        <span data-lang="ta" class="d-none">டிஜிட்டல் மார்க்கெட்டிங் கருவிப்பெட்டி</span>
+      </h2>
+      
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">
+                <span data-lang="en">Poster Designer</span>
+                <span data-lang="hi" class="d-none">पोस्टर डिज़ाइनर</span>
+                <span data-lang="ta" class="d-none">போஸ்டர் வடிவமைப்பாளர்</span>
+              </h5>
+              
+              <div class="text-center mb-3">
+                <img src="assets/po1.jpg"  canvas id="posterCanvas" width="600" height="400"></canvas>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">
+                      <span data-lang="en">Poster Text</span>
+                      <span data-lang="hi" class="d-none">पोस्टर टेक्स्ट</span>
+                      <span data-lang="ta" class="d-none">போஸ்டர் உரை</span>
+                    </label>
+                    <input type="text" id="posterText" class="form-control" 
+                           value="Special Offer! 20% Off" 
+                           oninput="updatePoster()">
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label class="form-label">
+                      <span data-lang="en">Product Image</span>
+                      <span data-lang="hi" class="d-none">उत्पाद छवि</span>
+                      <span data-lang="ta" class="d-none">தயாரிப்பு படம்</span>
+                    </label>
+                    <select id="productImageSelect" class="form-select" onchange="updatePoster()">
+                      <option value="assets/saaree.png">Product 1</option>
+                      <option value="assets/turmaric.jpg">Product 2</option>
+                      <option value="assets/basket bamboo.png">Product 3</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">
+                      <span data-lang="en">Color Scheme</span>
+                      <span data-lang="hi" class="d-none">रंग योजना</span>
+                      <span data-lang="ta" class="d-none">நிறத் திட்டம்</span>
+                    </label>
+                    <div>
+                      <div class="color-option" style="background-color: #6a1b9a;" onclick="changePosterColor('#6a1b9a')"></div>
+                      <div class="color-option" style="background-color: #e91e63;" onclick="changePosterColor('#e91e63')"></div>
+                      <div class="color-option" style="background-color: #2196F3;" onclick="changePosterColor('#2196F3')"></div>
+                      <div class="color-option" style="background-color: #4CAF50;" onclick="changePosterColor('#4CAF50')"></div>
+                      <div class="color-option" style="background-color: #FF9800;" onclick="changePosterColor('#FF9800')"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label class="form-label">
+                      <span data-lang="en">Templates</span>
+                      <span data-lang="hi" class="d-none">टेम्पलेट्स</span>
+                      <span data-lang="ta" class="d-none">டெம்ப்ளேட்கள்</span>
+                    </label>
+                    <div class="d-flex flex-wrap">
+                      <img src="assets/po1.jpg" 
+                           class="template-thumbnail selected" 
+                           onclick="changePosterTemplate(1)">
+                      <img src="assets/po2.jpg" 
+                           class="template-thumbnail" 
+                           onclick="changePosterTemplate(2)">
+                      <img src="assets/po3.jpg" 
+                           class="template-thumbnail" 
+                           onclick="changePosterTemplate(3)">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <button class="btn btn-empower" onclick="downloadPoster()">
+                <span data-lang="en">Download Poster</span>
+                <span data-lang="hi" class="d-none">पोस्टर डाउनलोड करें</span>
+                <span data-lang="ta" class="d-none">போஸ்டரை பதிவிறக்கவும்</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">
+                <span data-lang="en">Social Media Content</span>
+                <span data-lang="hi" class="d-none">सोशल मीडिया सामग्री</span>
+                <span data-lang="ta" class="d-none">சமூக ஊடக உள்ளடக்கம்</span>
+              </h5>
+              
+              <div class="mb-3">
+                <label class="form-label">
+                  <span data-lang="en">Post Content</span>
+                  <span data-lang="hi" class="d-none">पोस्ट सामग्री</span>
+                  <span data-lang="ta" class="d-none">இடுகை உள்ளடக்கம்</span>
+                </label>
+                <textarea class="form-control" rows="4" 
+                          data-lang-placeholder-en="Write your social media post here..."
+                          data-lang-placeholder-hi="अपनी सोशल मीडिया पोस्ट यहाँ लिखें..."
+                          data-lang-placeholder-ta="உங்கள் சமூக ஊடக இடுகையை இங்கே எழுதவும்..."></textarea>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label">
+                  <span data-lang="en">Hashtags</span>
+                  <span data-lang="hi" class="d-none">हैशटैग</span>
+                  <span data-lang="ta" class="d-none">ஹேஷ்டேக்கள்</span>
+                </label>
+                <input type="text" class="form-control" 
+                       value="#WomenEntrepreneurs #SmallBusiness #EmpowerHer">
+              </div>
+              
+              <button class="btn btn-empower w-100 mb-3" onclick="copyToClipboard()">
+                <span data-lang="en">Copy to Clipboard</span>
+                <span data-lang="hi" class="d-none">क्लिपबोर्ड पर कॉपी करें</span>
+                <span data-lang="ta" class="d-none">கிளிப்போர்டுக்கு நகலெடுக்கவும்</span>
+              </button>
+              
+              <div class="d-flex justify-content-between">
+                <button class="btn btn-outline-primary" onclick="shareOnWhatsApp()">
+                  <i class="bi bi-whatsapp"></i> WhatsApp
+                </button>
+                <button class="btn btn-outline-info" onclick="shareOnFacebook()">
+                  <i class="bi bi-facebook"></i> Facebook
+                </button>
+                <button class="btn btn-outline-secondary" onclick="shareOnInstagram()">
+                  <i class="bi bi-instagram"></i> Instagram
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <span data-lang="en">Marketing Tips</span>
+                <span data-lang="hi" class="d-none">मार्केटिंग टिप्स</span>
+                <span data-lang="ta" class="d-none">சந்தைப்படுத்தல் உதவிக்குறிப்புகள்</span>
+              </h5>
+              
+              <div class="accordion" id="marketingTipsAccordion">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tip1">
+                      <span data-lang="en">Best Times to Post</span>
+                      <span data-lang="hi" class="d-none">पोस्ट करने के सर्वोत्तम समय</span>
+                      <span data-lang="ta" class="d-none">இடுகையிட சிறந்த நேரங்கள்</span>
+                    </button>
+                  </h2>
+                  <div id="tip1" class="accordion-collapse collapse" data-bs-parent="#marketingTipsAccordion">
+                    <div class="accordion-body">
+                      <span data-lang="en">Post on Instagram between 9-11 AM and 7-9 PM for maximum engagement.</span>
+                      <span data-lang="hi" class="d-none">अधिकतम संलग्नता के लिए इंस्टाग्राम पर सुबह 9-11 बजे और शाम 7-9 बजे के बीच पोस्ट करें।</span>
+                      <span data-lang="ta" class="d-none">அதிகபட்ச ஈடுபாட்டிற்கு இன்ஸ்டாகிராமில் காலை 9-11 மணி மற்றும் மாலை 7-9 மணிக்கு இடையில் இடுகையிடவும்.</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tip2">
+                      <span data-lang="en">Engaging Captions</span>
+                      <span data-lang="hi" class="d-none">आकर्षक कैप्शन</span>
+                      <span data-lang="ta" class="d-none">ஈர்க்கக்கூடிய தலைப்புகள்</span>
+                    </button>
+                  </h2>
+                  <div id="tip2" class="accordion-collapse collapse" data-bs-parent="#marketingTipsAccordion">
+                    <div class="accordion-body">
+                      <span data-lang="en">Ask questions in your captions to encourage comments and engagement.</span>
+                      <span data-lang="hi" class="d-none">टिप्पणियों और संलग्नता को प्रोत्साहित करने के लिए अपने कैप्शन में प्रश्न पूछें।</span>
+                      <span data-lang="ta" class="d-none">கருத்துகள் மற்றும் ஈடுபாட்டை ஊக்குவிக்க உங்கள் தலைப்புகளில் கேள்விகளைக் கேளுங்கள்.</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tip3">
+                      <span data-lang="en">Product Photography</span>
+                      <span data-lang="hi" class="d-none">उत्पाद फोटोग्राफी</span>
+                      <span data-lang="ta" class="d-none">தயாரிப்பு புகைப்படம்</span>
+                    </button>
+                  </h2>
+                  <div id="tip3" class="accordion-collapse collapse" data-bs-parent="#marketingTipsAccordion">
+                    <div class="accordion-body">
+                      <span data-lang="en">Use natural light and simple backgrounds to make your products stand out.</span>
+                      <span data-lang="hi" class="d-none">अपने उत्पादों को उभारने के लिए प्राकृतिक प्रकाश और सरल पृष्ठभूमि का उपयोग करें।</span>
+                      <span data-lang="ta" class="d-none">உங்கள் தயாரிப்புகளை தனித்து நிற்க செய்ய இயற்கை ஒளி மற்றும் எளிய பின்னணிகளைப் பயன்படுத்தவும்.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+    <!-- Blog Section -->
+    <section id="blogs" class="py-5 bg-light">
+      <div class="container">
+        <h2 class="text-center mb-5">
+          <span data-lang="en">Learning Resources</span>
+          <span data-lang="hi" class="d-none">सीखने के संसाधन</span>
+          <span data-lang="ta" class="d-none">கற்றல் வளங்கள்</span>
+        </h2>
+        
+        <!-- Communication Skills Blog -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h3 class="card-title">
+              <span data-lang="en">📞 Effective Communication Skills</span>
+              <span data-lang="hi" class="d-none">📞 प्रभावी संचार कौशल</span>
+              <span data-lang="ta" class="d-none">📞 பயனுள்ள தொடர்பு திறன்கள்</span>
+            </h3>
+            <div class="blog-content">
+              <h5>
+                <span data-lang="en">Key Tips:</span>
+                <span data-lang="hi" class="d-none">मुख्य सुझाव:</span>
+                <span data-lang="ta" class="d-none">முக்கிய உதவிக்குறிப்புகள்:</span>
+              </h5>
+              <ul>
+                <li>
+                  <span data-lang="en">Use clear, simple language - avoid jargon</span>
+                  <span data-lang="hi" class="d-none">स्पष्ट, सरल भाषा का प्रयोग करें - जार्गन से बचें</span>
+                  <span data-lang="ta" class="d-none">தெளிவான, எளிய மொழியைப் பயன்படுத்தவும் - சிறப்பு சொற்களைத் தவிர்க்கவும்</span>
+                </li>
+                <li>
+                  <span data-lang="en">Practice active listening - nod, paraphrase, ask questions</span>
+                  <span data-lang="hi" class="d-none">सक्रिय सुनने का अभ्यास करें - सिर हिलाएँ, पुनरावृत्ति करें, प्रश्न पूछें</span>
+                  <span data-lang="ta" class="d-none">செயலில் கேட்பதைப் பயிற்சி செய்யுங்கள் - தலையசைத்தல், மறுபெயரிடுதல், கேள்விகள் கேட்கவும்</span>
+                </li>
+                <li>
+                  <span data-lang="en">Maintain eye contact and confident body language</span>
+                  <span data-lang="hi" class="d-none">आँख से संपर्क बनाए रखें और आत्मविश्वासपूर्ण शारीरिक भाषा</span>
+                  <span data-lang="ta" class="d-none">கண் தொடர்பை பராமரித்து, நம்பிக்கையான உடல் மொழியை பயன்படுத்தவும்</span>
+                </li>
+              </ul>
+              
+              <div class="real-example mt-4 p-3 bg-white border rounded">
+                <h6>
+                  <span data-lang="en">Real Example: Kiran Mazumdar-Shaw (Biocon)</span>
+                  <span data-lang="hi" class="d-none">वास्तविक उदाहरण: किरण मजूमदार-शॉ (बायोकॉन)</span>
+                  <span data-lang="ta" class="d-none">நிஜ உதாரணம்: கிரண் மஜூம்தார்-ஷா (பயோகான்)</span>
+                </h6>
+                <p>
+                  <span data-lang="en">When starting Biocon, Kiran effectively communicated complex biotechnology concepts to investors by using simple analogies and storytelling, helping secure early funding.</span>
+                  <span data-lang="hi" class="d-none">बायोकॉन शुरू करते समय, किरण ने सरल रूपकों और कहानी कहने का उपयोग करके निवेशकों को जटिल जैवप्रौद्योगिकी अवधारणाओं को प्रभावी ढंग से समझाया, जिससे प्रारंभिक धन जुटाने में मदद मिली।</span>
+                  <span data-lang="ta" class="d-none">பயோகானைத் தொடங்கும்போது, கிரண் எளிய உவமைகள் மற்றும் கதைசொல்லலைப் பயன்படுத்தி முதலீட்டாளர்களுக்கு சிக்கலான உயிரிதொழில்நுட்ப கருத்துகளை திறம்பட தெரிவித்தார், இது ஆரம்ப நிதியுதவியைப் பெற உதவியது.</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Negotiation Skills Blog -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h3 class="card-title">
+              <span data-lang="en">🤝 Mastering Negotiation</span>
+              <span data-lang="hi" class="d-none">🤝 बातचीत में महारत</span>
+              <span data-lang="ta" class="d-none">🤝 பேரம் பேசுதல்</span>
+            </h3>
+            <div class="blog-content">
+              <h5>
+                <span data-lang="en">Practical Techniques:</span>
+                <span data-lang="hi" class="d-none">व्यावहारिक तकनीकें:</span>
+                <span data-lang="ta" class="d-none">நடைமுறை நுட்பங்கள்:</span>
+              </h5>
+              <ol>
+                <li>
+                  <strong>
+                    <span data-lang="en">BATNA Principle:</span>
+                    <span data-lang="hi" class="d-none">BATNA सिद्धांत:</span>
+                    <span data-lang="ta" class="d-none">BATNA கொள்கை:</span>
+                  </strong>
+                  <span data-lang="en">(Best Alternative To Negotiated Agreement) - Always know your walk-away point</span>
+                  <span data-lang="hi" class="d-none">(बातचीत समझौते का सर्वोत्तम विकल्प) - हमेशा अपना वॉक-अवे पॉइंट जानें</span>
+                  <span data-lang="ta" class="d-none">(பேரம் பேசிய ஒப்பந்தத்திற்கான சிறந்த மாற்று) - எப்போதும் உங்கள் விலகல் புள்ளியை அறிந்து கொள்ளுங்கள்</span>
+                </li>
+                <li>
+                  <strong>
+                    <span data-lang="en">Anchor First:</span>
+                    <span data-lang="hi" class="d-none">पहले एंकर करें:</span>
+                    <span data-lang="ta" class="d-none">முதலில் நங்கூரமிடு:</span>
+                  </strong>
+                  <span data-lang="en">Whoever makes the first offer sets the negotiation range</span>
+                  <span data-lang="hi" class="d-none">जो पहली पेशकश करता है वह बातचीत की सीमा निर्धारित करता है</span>
+                  <span data-lang="ta" class="d-none">முதலில் சலுகை சொல்பவர் பேரம் பேசும் வரம்பை நிர்ணயிக்கிறார்</span>
+                </li>
+                <li>
+                  <strong>
+                    <span data-lang="en">Silence is Powerful:</span>
+                    <span data-lang="hi" class="d-none">मौन शक्तिशाली है:</span>
+                    <span data-lang="ta" class="d-none">மௌனம் சக்திவாய்ந்தது:</span>
+                  </strong>
+                  <span data-lang="en">After making an offer, stay quiet - the first to speak loses leverage</span>
+                  <span data-lang="hi" class="d-none">पेशकश करने के बाद चुप रहें - पहले बोलने वाला लाभ खो देता है</span>
+                  <span data-lang="ta" class="d-none">சலுகை சொன்ன பிறகு அமைதியாக இருங்கள் - முதலில் பேசுபவர் அதிகாரத்தை இழக்கிறார்</span>
+                </li>
+              </ol>
+              
+              <div class="real-example mt-4 p-3 bg-white border rounded">
+                <h6>
+                  <span data-lang="en">Case Study: Falguni Nayar (Nykaa)</span>
+                  <span data-lang="hi" class="d-none">केस स्टडी: फाल्गुनी नायर (नाइका)</span>
+                  <span data-lang="ta" class="d-none">வழக்கு ஆய்வு: ஃபால்குனி நாயர் (நைக்கா)</span>
+                </h6>
+                <p>
+                  <span data-lang="en">When negotiating with international beauty brands, Falguni used the 'bundling' technique - offering to market multiple products together rather than single items, creating win-win deals.</span>
+                  <span data-lang="hi" class="d-none">अंतरराष्ट्रीय ब्यूटी ब्रांड्स के साथ बातचीत करते समय, फाल्गुनी ने 'बंडलिंग' तकनीक का उपयोग किया - एकल आइटमों के बजाय एक साथ कई उत्पादों को बाजार में पेश करना, जिससे विन-विन डील बनी।</span>
+                  <span data-lang="ta" class="d-none">சர்வதேச அழகு பிராண்டுகளுடன் பேரம் பேசும் போது, ஃபால்குனி 'பண்டிலிங்' நுட்பத்தைப் பயன்படுத்தினார் - தனிப்பட்ட பொருட்களுக்கு பதிலாக பல பொருட்களை ஒன்றாக விற்பனை செய்வதற்கான சலுகையுடன், இரு தரப்பினருக்கும் நன்மை விளைவிக்கும் ஒப்பந்தங்களை உருவாக்கினார்.</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Leadership Skills Blog -->
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">
+              <span data-lang="en">👑 Leadership Lessons</span>
+              <span data-lang="hi" class="d-none">👑 नेतृत्व के सबक</span>
+              <span data-lang="ta" class="d-none">👑 தலைமைத்துவ பாடங்கள்</span>
+            </h3>
+            <div class="blog-content">
+              <h5>
+                <span data-lang="en">Key Principles from Successful Women Entrepreneurs:</span>
+                <span data-lang="hi" class="d-none">सफल महिला उद्यमियों से मुख्य सिद्धांत:</span>
+                <span data-lang="ta" class="d-none">வெற்றிகரமான பெண் தொழிலதிபர்களிடமிருந்து முக்கிய கோட்பாடுகள்:</span>
+              </h5>
+              
+              <div class="principle mb-3 p-3 bg-white border rounded">
+                <h6>1. 
+                  <span data-lang="en">"Build your tribe" - Vandana Luthra (VLCC)</span>
+                  <span data-lang="hi" class="d-none">"अपनी जनजाति बनाएं" - वंदना लूथरा (VLCC)</span>
+                  <span data-lang="ta" class="d-none">"உங்கள் குழுவை உருவாக்குங்கள்" - வந்தனா லூத்ரா (VLCC)</span>
+                </h6>
+                <p>
+                  <span data-lang="en">Surround yourself with people who complement your skills. Vandana built VLCC by partnering with nutritionists, trainers, and dermatologists rather than trying to do everything herself.</span>
+                  <span data-lang="hi" class="d-none">अपने कौशल को पूरक करने वाले लोगों के साथ खुद को घेरें। वंदना ने पोषण विशेषज्ञों, ट्रेनरों और त्वचा विशेषज्ञों के साथ साझेदारी करके VLCC का निर्माण किया न कि खुद ही सब कुछ करने की कोशिश की।</span>
+                  <span data-lang="ta" class="d-none">உங்கள் திறன்களை நிறைவு செய்யும் நபர்களால் உங்களை சூழவைக்கவும். வந்தனா ஊட்டச்சத்து நிபுணர்கள், பயிற்சியாளர்கள் மற்றும் தோல் மருத்துவர்களுடன் இணைந்து VLCCயை உருவாக்கினார், அனைத்தையும் தானே செய்ய முயற்சிக்கவில்லை.</span>
+                </p>
+              </div>
+              
+              <div class="principle mb-3 p-3 bg-white border rounded">
+                <h6>2. 
+                  <span data-lang="en">"Embrace the pivot" - Richa Kar (Zivame)</span>
+                  <span data-lang="hi" class="d-none">"पिवट को अपनाएं" - रिचा कर (ज़िवामे)</span>
+                  <span data-lang="ta" class="d-none">"மாற்றத்தை ஏற்றுக்கொள்ளுங்கள்" - ரிசா கார் (ஜிவாமே)</span>
+                </h6>
+                <p>
+                  <span data-lang="en">Started as an online retailer, Zivame pivoted to become a lingerie solutions provider when Richa realized Indian women needed education about proper fit more than just products.</span>
+                  <span data-lang="hi" class="d-none">एक ऑनलाइन रिटेलर के रूप में शुरू हुई, ज़िवामे एक अंडरगारमेंट्स समाधान प्रदाता बन गई जब रिचा को एहसास हुआ कि भारतीय महिलाओं को उत्पादों से अधिक उचित फिट के बारे में शिक्षा की आवश्यकता है।</span>
+                  <span data-lang="ta" class="d-none">ஒரு ஆன்லைன் சில்லறை விற்பனையாளராக தொடங்கிய ஜிவாமே, இந்திய பெண்களுக்கு பொருட்களை விட சரியான பொருத்தம் பற்றிய கல்வி தேவை என ரிசா உணர்ந்தபோது, உள்ளாடை தீர்வுகள் வழங்குநராக மாறியது.</span>
+                </p>
+              </div>
+              
+              <div class="principle mb-3 p-3 bg-white border rounded">
+                <h6>3. 
+                  <span data-lang="en">"Lead with empathy" - Suchi Mukherjee (Limeroad)</span>
+                  <span data-lang="hi" class="d-none">"सहानुभूति के साथ नेतृत्व करें" - सुचि मुखर्जी (लाइमरोड)</span>
+                  <span data-lang="ta" class="d-none">"பச்சாத்தாபத்துடன் வழிநடத்துங்கள்" - சுசி முகர்ஜி (லைம்ரோட்)</span>
+                </h6>
+                <p>
+                  <span data-lang="en">Suchi built Limeroad's culture around "compassionate commerce" - understanding that women shoppers often make purchase decisions based on emotional connections with products.</span>
+                  <span data-lang="hi" class="d-none">सुचि ने लाइमरोड की संस्कृति को "करुणामय वाणिज्य" के आसपास बनाया - यह समझते हुए कि महिला खरीदार अक्सर उत्पादों के साथ भावनात्मक संबंधों के आधार पर खरीदारी के निर्णय लेती हैं।</span>
+                  <span data-lang="ta" class="d-none">சுசி லைம்ரோடின் கலாச்சாரத்தை "கண்ணியமான வணிகம்" சுற்றி உருவாக்கினார் - பெண் வாடிக்கையாளர்கள் பெரும்பாலும் பொருட்களுடன் உணர்ச்சி பூர்வமான தொடர்புகளின் அடிப்படையில் வாங்கும் முடிவுகளை எடுப்பதை புரிந்துகொண்டு.</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4">
+    <div class="container text-center">
+      <p>
+        <span data-lang="en">© 2025 Aatmanirbhar Nari | For Women Entrepreneurs in India</span>
+        <span data-lang="hi" class="d-none">© 2025 आत्मनिर्भर नारी | भारत की महिला उद्यमियों के लिए</span>
+        <span data-lang="ta" class="d-none">© 2025 ஆத்மநிர்பர் நாரி | இந்தியாவின் பெண் தொழில்முனைவோருக்காக</span>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Current language (default: English)
+    let currentLanguage = 'en';
+    
+    // Product data in multiple languages
+const products = [
+  { 
+    id: 1, 
+    name: {
+      en: "Handmade Saree",
+      hi: "हाथ से बनी साड़ी",
+      ta: "கைவினை சேலை"
+    }, 
+    price: 899,
+    image: "assets/saaree.png"
+  },
+  {
+    id: 2,
+    name: {
+      en: "Organic Turmeric",
+      hi: "जैविक हल्दी",
+      ta: "கரிம மஞ்சள்"
+    },
+    price: 199,
+    image: "assets/turmaric.jpg"
+  },
+  {
+    id: 3,
+    name: {
+      en: "Bamboo Basket",
+      hi: "बांस की टोकरी",
+      ta: "மூங்கில் கூடை"
+    },
+    price: 349,
+    image: "assets/basket bamboo.png"
+  }
+];
+
+
+    // Poster design variables
+    let posterColor = '#6a1b9a';
+    let posterTemplate = 1;
+    let canvas, ctx;
+
+    // Change language function
+    function changeLanguage(lang) {
+      currentLanguage = lang;
+      
+      // Update body class for font family
+      document.body.className = '';
+      if (lang === 'hi') document.body.classList.add('hindi-font');
+      if (lang === 'ta') document.body.classList.add('tamil-font');
+      
+      // Show/hide language-specific elements
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        el.classList.add('d-none');
+        if (el.dataset.lang === lang) {
+          el.classList.remove('d-none');
+        }
+      });
+      
+      // Update placeholders
+      document.querySelectorAll('[data-lang-placeholder-en]').forEach(el => {
+        const placeholderAttr = `data-lang-placeholder-${lang}`;
+        el.placeholder = el.getAttribute(placeholderAttr) || el.getAttribute('data-lang-placeholder-en');
+      });
+      
+      // Refresh dynamic content
+      showProducts();
+      calculateEMI();
+      updatePoster();
+    }
+
+    // Hardcoded IVR/video simulation
+    function playIVR() {
+      const messages = {
+        en: "Simulating IVR call: 'Press 1 for business tips, 2 for financial advice...'",
+        hi: "आईवीआर कॉल सिमुलेशन: 'व्यवसाय सुझावों के लिए 1 दबाएं, वित्तीय सलाह के लिए 2...'",
+        ta: "ஐவிஆர் அழைப்பு உருவகப்படுத்துதல்: 'வணிக உதவிக்குறிப்புகளுக்கு 1 அழுத்தவும், நிதி ஆலோசனைக்கு 2...'"
+      };
+      alert(messages[currentLanguage]);
+    }
+
+    // Load products in current language
+    function showProducts() {
+      const productList = document.getElementById('productList');
+      if (!productList) return;
+      
+      productList.innerHTML = products.map(product => `
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="${product.image}" class="card-img-top product-img">
+            <div class="card-body">
+              <h5 class="card-title">${product.name[currentLanguage]}</h5>
+              <p class="card-text">₹${product.price}</p>
+              <button class="btn btn-sm btn-empower" onclick="listProduct(${product.id})">
+                ${currentLanguage === 'en' ? 'List on ONDC' : 
+                 currentLanguage === 'hi' ? 'ONDC पर सूचीबद्ध करें' : 
+                 'ONDC இல் பட்டியலிடு'}
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Business planning tools
+    function generateSWOT() {
+      const idea = document.getElementById('businessIdea').value;
+      
+      const strengths = {
+        en: ["Traditional knowledge", "Low production cost"],
+        hi: ["पारंपरिक ज्ञान", "कम उत्पादन लागत"],
+        ta: ["பாரம்பரிய அறிவு", "குறைந்த உற்பத்தி செலவு"]
+      };
+      
+      const weaknesses = {
+        en: ["Limited digital presence", "Small-scale operations"],
+        hi: ["सीमित डिजिटल उपस्थिति", "छोटे पैमाने पर संचालन"],
+        ta: ["வரம்பான டிஜிட்டல் இருப்பு", "சிறிய அளவிலான செயல்பாடுகள்"]
+      };
+      
+      document.getElementById('swotResult').innerHTML = `
+        <strong>${currentLanguage === 'en' ? 'Strengths' : 
+                  currentLanguage === 'hi' ? 'मजबूत पक्ष' : 
+                  'வலிமைகள்'}:</strong> ${strengths[currentLanguage].join(', ')}<br>
+        <strong>${currentLanguage === 'en' ? 'Weaknesses' : 
+                  currentLanguage === 'hi' ? 'कमजोरियाँ' : 
+                  'பலவீனங்கள்'}:</strong> ${weaknesses[currentLanguage].join(', ')}
+      `;
+    }
+
+    // Financial tools
+    function calculateEMI() {
+      const amount = parseFloat(document.getElementById('loanAmount').value);
+      const tenure = parseInt(document.getElementById('loanTenure').value);
+      const emi = (amount * 0.12 / 12) * ((1 + 0.12 / 12) ** tenure) / (((1 + 0.12 / 12) ** tenure) - 1);
+      
+      const loanText = {
+        en: "Loan Details",
+        hi: "ऋण विवरण",
+        ta: "கடன் விவரங்கள்"
+      };
+      
+      const amountText = {
+        en: "Amount",
+        hi: "राशि",
+        ta: "தொகை"
+      };
+      
+      const tenureText = {
+        en: "Tenure",
+        hi: "अवधि",
+        ta: "காலம்"
+      };
+      
+      document.getElementById('emiResult').innerHTML = `
+        <strong>${loanText[currentLanguage]}:</strong><br>
+        ${amountText[currentLanguage]}: ₹${amount.toLocaleString()}<br>
+        ${tenureText[currentLanguage]}: ${tenure} ${currentLanguage === 'en' ? 'months' : 
+                                        currentLanguage === 'hi' ? 'महीने' : 
+                                        'மாதங்கள்'}<br>
+        <strong>EMI:</strong> ₹${emi.toFixed(2)}/${currentLanguage === 'en' ? 'month' : 
+                                          currentLanguage === 'hi' ? 'महीना' : 
+                                          'மாதம்'}
+      `;
+    }
+
+    function alertPayment() {
+      const messages = {
+        en: "Payment of ₹200 successful!",
+        hi: "₹200 का भुगतान सफल!",
+        ta: "₹200 கட்டணம் வெற்றிகரமாக!"
+      };
+      alert(messages[currentLanguage]);
+    }
+
+    // Poster Design Functions
+    function initPosterDesigner() {
+      canvas = document.getElementById('posterCanvas');
+      ctx = canvas.getContext('2d');
+      updatePoster();
+    }
+
+    function changePosterColor(color) {
+      posterColor = color;
+      updatePoster();
+      
+      // Update selected color option
+      document.querySelectorAll('.color-option').forEach(el => {
+        el.style.borderColor = el.style.backgroundColor === color ? '#333' : '#ddd';
+      });
+    }
+
+    function changePosterTemplate(templateNum) {
+      posterTemplate = templateNum;
+      updatePoster();
+      
+      // Update selected template
+      document.querySelectorAll('.template-thumbnail').forEach((el, index) => {
+        el.classList.toggle('selected', index === templateNum - 1);
+      });
+    }
+
+    function updatePoster() {
+      const text = document.getElementById('posterText').value;
+      const productImageUrl = document.getElementById('productImageSelect').value;
+      
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw background based on template
+      if (posterTemplate === 1) {
+        // Template 1: Solid color with centered text
+        ctx.fillStyle = posterColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Add product image
+        const img = new Image();
+        img.src = productImageUrl;
+        img.onload = function() {
+          ctx.drawImage(img, canvas.width/2 - 150, 50, 300, 200);
+          
+          // Add text
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 30px Arial';
+          ctx.textAlign = 'center';
+          ctx.fillText(text, canvas.width/2, 300);
+          
+          // Add small text
+          ctx.font = '20px Arial';
+          ctx.fillText(currentLanguage === 'en' ? 'Limited Time Offer!' : 
+                      currentLanguage === 'hi' ? 'सीमित समय का प्रस्ताव!' : 
+                      'வரையறுக்கப்பட்ட நேர சலுகை!', 
+                      canvas.width/2, 330);
+        };
+      } 
+      else if (posterTemplate === 2) {
+        // Template 2: Gradient with left-aligned text
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        gradient.addColorStop(0, posterColor);
+        gradient.addColorStop(1, '#e91e63');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Add product image
+        const img = new Image();
+        img.src = productImageUrl;
+        img.onload = function() {
+          ctx.drawImage(img, 50, 50, 200, 200);
+          
+          // Add text
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 28px Arial';
+          ctx.textAlign = 'left';
+          ctx.fillText(text, 270, 100);
+          
+          // Add small text
+          ctx.font = '18px Arial';
+          ctx.fillText(currentLanguage === 'en' ? 'Visit our store today!' : 
+                      currentLanguage === 'hi' ? 'आज ही हमारे स्टोर पर आएं!' : 
+                      'இன்றே எங்கள் கடைக்கு வருக!', 
+                      270, 140);
+        };
+      }
+      else {
+        // Template 3: Split layout
+        ctx.fillStyle = posterColor;
+        ctx.fillRect(0, 0, canvas.width/2, canvas.height);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(canvas.width/2, 0, canvas.width/2, canvas.height);
+        
+        // Add product image
+        const img = new Image();
+        img.src = productImageUrl;
+        img.onload = function() {
+          ctx.drawImage(img, canvas.width/2 - 100, 50, 200, 200);
+          
+          // Add text on colored side
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 24px Arial';
+          ctx.textAlign = 'center';
+          ctx.fillText(text, canvas.width/4, 100);
+          
+          // Add text on white side
+          ctx.fillStyle = posterColor;
+          ctx.font = 'bold 20px Arial';
+          ctx.fillText(currentLanguage === 'en' ? 'Special Discount!' : 
+                      currentLanguage === 'hi' ? 'विशेष छूट!' : 
+                      'சிறப்பு தள்ளுபடி!', 
+                      canvas.width/4*3, 100);
+        };
+      }
+    }
+
+    function downloadPoster() {
+      const link = document.createElement('a');
+      link.download = 'empowerher-poster.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    // Marketing Tools
+    function copyToClipboard() {
+      const textarea = document.querySelector('#marketing textarea');
+      textarea.select();
+      document.execCommand('copy');
+      
+      const messages = {
+        en: "Content copied to clipboard!",
+        hi: "सामग्री क्लिपबोर्ड पर कॉपी हो गई!",
+        ta: "உள்ளடக்கம் கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது!"
+      };
+      alert(messages[currentLanguage]);
+    }
+
+    function shareOnWhatsApp() {
+      const text = document.querySelector('#marketing textarea').value;
+      const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    }
+
+    function shareOnFacebook() {
+      const messages = {
+        en: "Sharing to Facebook would open a new window with your content",
+        hi: "फेसबुक पर शेयर करने से आपकी सामग्री के साथ एक नई विंडो खुलेगी",
+        ta: "ஃபேஸ்புக்கில் பகிர்வது உங்கள் உள்ளடக்கத்துடன் ஒரு புதிய சாளரத்தைத் திறக்கும்"
+      };
+      alert(messages[currentLanguage]);
+    }
+
+    function shareOnInstagram() {
+      const messages = {
+        en: "For Instagram, download the poster and share it directly from the app",
+        hi: "इंस्टाग्राम के लिए, पोस्टर डाउनलोड करें और इसे सीधे ऐप से शेयर करें",
+        ta: "இன்ஸ்டாகிராமுக்கு, போஸ்டரைப் பதிவிறக்கி அதை நேரடியாக ஆப்பிலிருந்து பகிரவும்"
+      };
+      alert(messages[currentLanguage]);
+    }
+
+    // Initialize
+    window.onload = function() {
+      changeLanguage('en'); // Set default language
+      showProducts();
+      calculateEMI();
+      initPosterDesigner();
+    };
+  </script>
+</body>
+</html>
